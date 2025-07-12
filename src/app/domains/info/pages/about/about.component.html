@@ -7,8 +7,9 @@
     soluta, ad et eveniet odit rem perferendis porro, quidem iste.
   </p>
   <p class="text-base">
-    Numero de clientes @if (duration() > 0) {
-    <app-counter [duration]="duration()" [message]="message()" />
+    Numero de clientes
+    @if (duration() > 0) {
+      <app-counter [duration]="duration()" [message]="message()" />
     }
   </p>
   <div>
