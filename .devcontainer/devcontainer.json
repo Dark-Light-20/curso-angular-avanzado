@@ -1,0 +1,43 @@
+{
+  "name": "Angular Dev Container",
+  // Usa una imagen base de Node.js preconfigurada para dev containers.
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18",
+
+  // El comando a ejecutar después de crear el contenedor:
+  // 1. Corrige los permisos de node_modules en la ruta correcta.
+  // 2. Instala Angular CLI versión 19 LTS globalmente.
+  // 3. Ejecuta npm ci.
+  "postCreateCommand": "sudo chown -R node:node ${containerWorkspaceFolder}/node_modules && npm i -g @angular/cli@v19-lts && npm ci",
+
+  // Personalizaciones para VS Code.
+  "customizations": {
+    "vscode": {
+      // Extensiones recomendadas para el desarrollo con Angular.
+      "extensions": [
+        "angular.ng-template",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "vivaxy.vscode-conventional-commits",
+        "google.geminicodeassist",
+        "eamodio.gitlens",
+        "VisualStudioExptTeam.vscodeintellicode",
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        "Orta.vscode-jest",
+        "bradlc.vscode-tailwindcss",
+        "Gruntfuggly.todo-tree"
+      ]
+    }
+  },
+
+  // Redirige el puerto 4200 (usado por 'ng serve') del contenedor al host.
+  "forwardPorts": [4200],
+
+  // Monta un volumen para node_modules, mejorando el rendimiento.
+  // El volumen nombrado incluye el nombre único del workspace.
+  "mounts": [
+    "source=node-modules-${containerWorkspaceFolderBasename},target=${containerWorkspaceFolder}/node_modules,type=volume"
+  ],
+
+  // Ejecuta el contenedor como el usuario 'node' en lugar de 'root' por seguridad.
+  "remoteUser": "node"
+}
