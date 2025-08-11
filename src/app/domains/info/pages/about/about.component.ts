@@ -5,6 +5,7 @@ import { CounterComponent } from '@shared/components/counter/counter.component';
 import { HighlightDirective } from '@shared/directives/highlight.directive';
 
 import { WaveAudioComponent } from '@info/components/wave-audio/wave-audio.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-about',
@@ -13,6 +14,7 @@ import { WaveAudioComponent } from '@info/components/wave-audio/wave-audio.compo
     CounterComponent,
     WaveAudioComponent,
     HighlightDirective,
+    FormsModule,
   ],
   templateUrl: './about.component.html',
 })

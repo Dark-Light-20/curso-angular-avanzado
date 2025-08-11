@@ -6,12 +6,13 @@
     delectus numquam aliquid itaque nulla. Alias fugiat est, voluptatem commodi
     soluta, ad et eveniet odit rem perferendis porro, quidem iste.
   </p>
-  <p class="text-base">
-    Numero de clientes
-    @if (duration() > 0) {
-      <app-counter [duration]="duration()" [message]="message()" />
-    }
+  <p class="text-base">Numero de clientes</p>
+  <p>
+    <input [(ngModel)]="duration" type="range" min="0" max="1000" />
   </p>
+  @if (duration() > 0) {
+    <app-counter [duration]="duration()" [message]="message()" />
+  }
   <div>
     <app-wave-audio audioUrl="assets/audio.mp3" />
   </div>
