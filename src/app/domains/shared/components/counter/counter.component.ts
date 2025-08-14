@@ -16,10 +16,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './counter.component.html',
 })
 export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
-  duration = input.required<number>();
-  doubleDuration = computed(() => this.duration() * 2);
-  message = input.required<string>();
-  counter = signal(0);
+  $duration = input.required<number>({ alias: 'duration' });
+  $doubleDuration = computed(() => this.$duration() * 2);
+  $message = input.required<string>({ alias: 'message' });
+  $counter = signal(0);
   counterRef: number | undefined;
 
   constructor() {
@@ -32,7 +32,7 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
     // Read signal change and execute async logic only
     // For derivates from signal use computed (ex: doubleDuration)
     effect(() => {
-      this.duration();
+      this.$duration();
       this.doSomething();
     });
   }
@@ -54,11 +54,11 @@ export class CounterComponent implements OnInit, AfterViewInit, OnDestroy {
     // async, then, subs
     console.log('ngOnInit');
     console.log('-'.repeat(10));
-    console.log('duration =>', this.duration());
-    console.log('message =>', this.message());
+    console.log('duration =>', this.$duration());
+    console.log('message =>', this.$message());
     this.counterRef = window.setInterval(() => {
       console.log('run interval');
-      this.counter.update(statePrev => statePrev + 1);
+      this.$counter.update(statePrev => statePrev + 1);
     }, 1000);
   }
 
