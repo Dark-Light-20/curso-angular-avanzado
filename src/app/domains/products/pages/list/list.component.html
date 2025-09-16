@@ -4,7 +4,7 @@
       <li>
         <a routerLink="/">All</a>
       </li>
-      @for (category of categories(); track category) {
+      @for (category of $categories(); track category) {
         <li>
           <a routerLink="/category/{{ category.slug }}">{{ category.name }}</a>
         </li>
