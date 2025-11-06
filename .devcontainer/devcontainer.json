@@ -1,7 +1,7 @@
 {
   "name": "Angular Dev Container",
   // Usa una imagen base de Node.js preconfigurada para dev containers.
-  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:18",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
 
   // El comando a ejecutar después de crear el contenedor:
   // 1. Corrige los permisos de node_modules en la ruta correcta.
