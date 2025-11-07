@@ -1,4 +1,4 @@
 export const environment = {
-  prduction: false,
+  production: false,
   apiUrl: 'https://api.escuelajs.co', // TODO: Validate local api server
 };

@@ -29,6 +29,11 @@ export const routes: Routes = [
             './domains/products/pages/product-detail/product-detail.component'
           ),
       },
+      {
+        path: 'locations',
+        loadComponent: () =>
+          import('./domains/info/pages/locations/locations.component'),
+      },
     ],
   },
   {
