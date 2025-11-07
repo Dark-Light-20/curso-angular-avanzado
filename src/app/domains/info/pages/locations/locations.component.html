@@ -1,5 +1,9 @@
-<ul>
+<h1 class="text-lg font-bold">Tiendas cercanas</h1>
+
+<div id="map" style="height: 200px"></div>
+
+<ol class="mt-8">
   @for (location of locationsResource.value(); track location.id) {
-    <li>{{ location.name }}</li>
+    <li class="list-disc">Tienda: {{ location.name }}</li>
   }
-</ul>
+</ol>
