@@ -2,9 +2,9 @@ import { Component, inject, input, linkedSignal, effect } from '@angular/core';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ProductService } from '@shared/services/product.service';
 import { CartService } from '@shared/services/cart.service';
-import { Meta, Title } from '@angular/platform-browser';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { environment } from '@env/environment';
+import { MetaTagsService } from '@shared/services/meta-tags.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,23 +12,21 @@ import { environment } from '@env/environment';
   templateUrl: './product-detail.component.html',
 })
 export default class ProductDetailComponent {
-  readonly slug = input.required<string>();
+  private readonly _productService = inject(ProductService);
+  private readonly _cartService = inject(CartService);
+  private readonly _metaTagsService = inject(MetaTagsService);
 
-  productResource = rxResource({
+  readonly slug = input.required<string>();
+  readonly productResource = rxResource({
     request: () => ({ slug: this.slug() }),
-    loader: ({ request }) => this.productService.getOne({ slug: request.slug }),
+    loader: ({ request }) =>
+      this._productService.getOne({ slug: request.slug }),
   });
-  $cover = linkedSignal({
+  readonly $cover = linkedSignal({
     source: this.productResource.value,
     computation: (product, previousValue) =>
       product && product.images.length > 0 ? product.images[0] : previousValue,
   });
-
-  private productService = inject(ProductService);
-  private cartService = inject(CartService);
-
-  private readonly _titleService = inject(Title);
-  private readonly _metaTagService = inject(Meta);
 
   constructor() {
     effect(() => {
@@ -39,26 +37,11 @@ export default class ProductDetailComponent {
   setMetadata() {
     const product = this.productResource.value();
     if (product) {
-      this._titleService.setTitle(product.title);
-      this._metaTagService.updateTag({
-        name: 'description',
-        content: product.description,
-      });
-      this._metaTagService.updateTag({
-        property: 'og:title',
-        content: product.title,
-      });
-      this._metaTagService.updateTag({
-        property: 'og:image',
-        content: product.images[0],
-      });
-      this._metaTagService.updateTag({
-        property: 'og:description',
-        content: product.description,
-      });
-      this._metaTagService.updateTag({
-        name: 'og:url',
-        content: `${environment.domain}/product/${product.slug}`,
+      this._metaTagsService.updateMetaTags({
+        title: `${product.title} - Ng Store`,
+        description: product.description,
+        image: `${environment.domain}${this.$cover()}`,
+        url: `${environment.domain}/products/${product.slug}`,
       });
     }
   }
@@ -70,7 +53,7 @@ export default class ProductDetailComponent {
   addToCart() {
     const product = this.productResource.value();
     if (product) {
-      this.cartService.addToCart(product);
+      this._cartService.addToCart(product);
     }
   }
 }
