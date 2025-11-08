@@ -29,4 +29,14 @@ export class ProductService {
     }
     return this.http.get<Product>(url.toString());
   }
+
+  getRelatedProducts(params: { id?: string; slug?: string }) {
+    const url = new URL(`${environment.apiUrl}/api/v1/products`);
+    if (params.id) {
+      url.href += `/${params.id}/related`;
+    } else if (params.slug) {
+      url.href += `/slug/${params.slug}/related`;
+    }
+    return this.http.get<Product[]>(url.toString());
+  }
 }

@@ -1,0 +1,9 @@
+<div class="mt-8">
+  <h2 class="text-2xl font-bold mb-4">Productos relacionados</h2>
+  <div
+    class="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-6 lg:grid-cols-8 gap-4">
+    @for (product of relatedResource.value(); track product.id) {
+      <app-product [product]="product"></app-product>
+    }
+  </div>
+</div>
