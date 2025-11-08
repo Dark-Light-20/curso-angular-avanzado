@@ -1,4 +1,11 @@
-import { Component, effect, inject, resource, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  resource,
+  signal,
+} from '@angular/core';
 import { LocationsService } from '@shared/services/locations.service';
 import { Marker } from 'leaflet';
 import { Location } from '@shared/models/location.model';
@@ -6,6 +13,7 @@ import { Location } from '@shared/models/location.model';
 @Component({
   selector: 'app-locations',
   templateUrl: './locations.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export default class LocationsComponent {
   private readonly _locationsService = inject(LocationsService);

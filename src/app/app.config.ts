@@ -1,4 +1,7 @@
-import { ApplicationConfig } from '@angular/core';
+import {
+  ApplicationConfig,
+  provideExperimentalZonelessChangeDetection,
+} from '@angular/core';
 import {
   PreloadAllModules,
   provideRouter,
@@ -23,5 +26,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideHttpClient(withFetch()),
     provideClientHydration(withEventReplay(), withIncrementalHydration()),
+    provideExperimentalZonelessChangeDetection(),
   ],
 };

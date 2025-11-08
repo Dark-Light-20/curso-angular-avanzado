@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 
@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [CommonModule, RouterOutlet],
   template: '<router-outlet />',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  title = 'store';
-}
+export class AppComponent {}
