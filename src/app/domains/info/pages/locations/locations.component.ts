@@ -1,11 +1,4 @@
-import {
-  afterNextRender,
-  Component,
-  effect,
-  inject,
-  resource,
-  signal,
-} from '@angular/core';
+import { Component, effect, inject, resource, signal } from '@angular/core';
 import { LocationsService } from '@shared/services/locations.service';
 import { Marker } from 'leaflet';
 import { Location } from '@shared/models/location.model';
@@ -30,10 +23,8 @@ export default class LocationsComponent {
   });
 
   constructor() {
-    afterNextRender(() => {
-      this.getCurrentLocation();
-      this.initializeMap();
-    });
+    this.getCurrentLocation();
+    this.initializeMap();
 
     effect(() => {
       const origin = this.$origin();
